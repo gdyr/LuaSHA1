@@ -12,7 +12,7 @@ function sha1(message)
   message = message  .. '\x80';
   local paddingAmount = (120 - (#message % 64)) % 64;
   message = message .. string.rep('\0', paddingAmount);
-  message = message .. bitstring.pack('64:int:big', bits);
+  message = message .. string.pack('>I8', bits);
   
   -- rotate function
   local function rol(value, bits)
@@ -71,7 +71,6 @@ function sha1(message)
     
   end;
   
-  local hash = string.pack('>I4I4I4I4I4', h0, h1, h2, h3, h4);
-  return bitstring.hexstream(hash);
+  return string.format('%08x%08x%08x%08x%08x', h0, h1, h2, h3, h4);
   
 end
