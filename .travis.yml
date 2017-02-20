@@ -11,9 +11,5 @@ before_install:
   - source env/bin/activate          # Add directory with all installed binaries to PATH.
   - luarocks install busted
 
-install:
-  - luarocks make # Install the rock, assuming there is a rockspec
-                  # in the root of the repository.
-
 script:
   - busted
